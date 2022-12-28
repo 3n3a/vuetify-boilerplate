@@ -1,19 +1,20 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
 
+// Components
+import DefaultLayout from '@/layouts/default/Default.vue'
+import Home from '@/views/Home.vue'
+import Second from '@/views/TestSecond.vue'
 
 const routes = [
   {
     path: '/',
-    component: () => import('@/layouts/default/Default.vue'),
+    component: DefaultLayout,
     children: [
       {
         path: '',
         name: 'Home',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
+        component: Home,
         meta: {
           isMenuItem: true,
           inactiveIcon: 'mdi-home-outline',
@@ -23,7 +24,7 @@ const routes = [
       {
         path: 'second',
         name: 'Second',
-        component: () => import(/* webpackChunkName: "second" */ '@/views/TestSecond.vue'),
+        component: Second,
         meta: {
           isMenuItem: true,
           inactiveIcon: 'mdi-flask-empty-outline',

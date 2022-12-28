@@ -2,10 +2,11 @@
   <v-list
     v-model:opened="opened"
     :items="computedItems"
-    :lines="false"
+    :lines=false
     color="primary"
     item-props
   >
+
   </v-list>
 </template>
 
@@ -26,19 +27,24 @@
   const opened = ref<string[]>([])
   const route = useRoute()
 
+  const isActiveRoute = (item: RouteRecordNormalized) => {
+    return (opened.value.includes(item.name?.toString() ?? '') ||
+          route.name === item.name?.toString())
+  }
   const computedItems = computed(() => props.items?.map(item => {
     if (item.meta?.isMenuItem ?? false) {
       return {
         title: item.name,
         to: item.path,
-        children: item.children,
-        prependIcon: (
-          opened.value.includes(item.name?.toString() ?? '') ||
-          route.name === item.name?.toString()) ?
+        // children: item.children,
+        prependIcon:
+          isActiveRoute(item) ?
             item.meta.activeIcon :
             item.meta.inactiveIcon,
         value: item.name,
         appendIcon: item.meta.appendIcon,
+        link: true,
+        active: isActiveRoute(item),
       }
     }
   }))

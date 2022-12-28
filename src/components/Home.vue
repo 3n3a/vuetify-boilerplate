@@ -16,10 +16,9 @@
       <v-row class="d-flex align-center justify-center">
         <v-col cols="auto">
           <v-btn
-            href="https://next.vuetifyjs.com/components/all/"
+            to="/second"
+            value="second"
             min-width="164"
-            rel="noopener noreferrer"
-            target="_blank"
             variant="text"
           >
             <v-icon
@@ -28,7 +27,7 @@
               start
             />
 
-            Components
+            Test Page
           </v-btn>
         </v-col>
 
