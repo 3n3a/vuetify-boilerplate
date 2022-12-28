@@ -53,19 +53,18 @@
 
         <v-col cols="auto">
           <v-btn
-            href="https://community.vuetifyjs.com/"
+            to="/login"
+            value="login"
             min-width="164"
-            rel="noopener noreferrer"
-            target="_blank"
             variant="text"
           >
             <v-icon
-              icon="mdi-account-group"
+              icon="mdi-lock"
               size="large"
               start
             />
 
-            Community
+            Login
           </v-btn>
         </v-col>
       </v-row>

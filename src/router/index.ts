@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '@/layouts/default/Default.vue'
 import Home from '@/views/Home.vue'
 import Second from '@/views/TestSecond.vue'
+import Login from '@/views/Login.vue'
 
 const routes = [
   {
@@ -29,6 +30,14 @@ const routes = [
           isMenuItem: true,
           inactiveIcon: 'mdi-flask-empty-outline',
           activeIcon: 'mdi-flask-empty'
+        }
+      },
+      {
+        path: 'login',
+        name: 'Login',
+        component: Login,
+        meta: {
+          isMenuItem: false,
         }
       }
     ],
