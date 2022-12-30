@@ -1,5 +1,6 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAppStore } from '@/store/app';
 
 // Components
 import DefaultLayout from '@/layouts/default/Default.vue'
@@ -51,7 +52,7 @@ const routes = [
   },
   {
     path: '/:pathMatch(.*)*',
-    name: 'error',
+    name: 'Error',
     component: () => import(/* webpackChunkName: "error" */ '@/views/Error.vue')
   }
 ]
@@ -61,8 +62,30 @@ const router = createRouter({
   routes,
 })
 
+
+router.beforeEach(async (to, from) => {
+  const app = useAppStore();
+
+  // pages that won't redirect to login, if unauthenticated
+  const ignoreList = [
+    "Login",
+    "Register",
+    "Error",
+  ]
+
+  if (
+    // make sure the user is authenticated
+    !app.isAuthenticated &&
+    // ❗️ Avoid an infinite redirect
+    !ignoreList.includes(to.name?.toString() ?? "")
+  ) {
+    // redirect the user to the login page
+    return { name: 'Login' }
+  }
+})
+
 router.resolve({
-  name: 'error',
+  name: 'Error',
   params: { pathMatch: ['error'] },
 }).href // '/error'
 

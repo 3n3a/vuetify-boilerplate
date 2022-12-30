@@ -30,6 +30,10 @@
 </style>
 
 <script lang="ts">
+  import { useAppStore } from '@/store/app';
+  import router from '@/router';
+
+const app = useAppStore();
 export default {
   data: () => ({
     valid: false,
@@ -51,7 +55,11 @@ export default {
       // @ts-ignore
       const { valid } = await this.$refs.form.validate()
 
-      if (valid) console.log('handleFormSubmit')
+      if (valid) {
+        console.log('DOING FAKE LOGIN!!!')
+        app.isAuthenticated = true
+        await router.push({ name: 'Home' })
+      }
     },
     reset() {
       // @ts-ignore
