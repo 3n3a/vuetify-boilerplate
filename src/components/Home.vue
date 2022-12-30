@@ -53,7 +53,7 @@
 
         <v-col cols="auto">
           <v-btn
-            to="/login"
+            to="/auth/login"
             value="login"
             min-width="164"
             variant="text"
