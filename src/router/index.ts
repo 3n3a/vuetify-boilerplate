@@ -48,6 +48,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "register" */'@/views/Register.vue'),
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'error',
+    component: () => import(/* webpackChunkName: "error" */ '@/views/Error.vue')
   }
 ]
 
@@ -55,5 +60,10 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
+
+router.resolve({
+  name: 'error',
+  params: { pathMatch: ['error'] },
+}).href // '/error'
 
 export default router
