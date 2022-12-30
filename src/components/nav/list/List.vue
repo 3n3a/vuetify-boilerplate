@@ -31,21 +31,25 @@
     return (opened.value.includes(item.name?.toString() ?? '') ||
           route.name === item.name?.toString())
   }
-  const computedItems = computed(() => props.items?.map(item => {
-    if (item.meta?.isMenuItem ?? false) {
-      return {
-        title: item.name,
-        to: item.path,
-        // children: item.children,
-        prependIcon:
-          isActiveRoute(item) ?
-            item.meta.activeIcon :
-            item.meta.inactiveIcon,
-        value: item.name,
-        appendIcon: item.meta.appendIcon,
-        link: true,
-        active: isActiveRoute(item),
-      }
+const computedItems = computed(() => props.items?.map(item => {
+  if (item.meta?.isMenuItem && item) {
+    return {
+      title: item.name,
+      to: item.path,
+      // children: item.children,
+      prependIcon:
+        isActiveRoute(item) ?
+          item.meta.activeIcon :
+          item.meta.inactiveIcon,
+      value: item.name,
+      appendIcon: item.meta.appendIcon,
+      link: true,
+      active: isActiveRoute(item),
     }
-  }))
+  }
+}).filter((value, index, self) => {
+  // filter out duplicates
+  return (self.indexOf(value) === index) &&
+    ((value?.title ?? "") != "");
+}))
 </script>

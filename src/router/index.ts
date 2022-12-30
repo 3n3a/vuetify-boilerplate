@@ -5,7 +5,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '@/layouts/default/Default.vue'
 import Home from '@/views/Home.vue'
 import Second from '@/views/TestSecond.vue'
-import Login from '@/views/Login.vue'
 
 const routes = [
   {
@@ -32,16 +31,19 @@ const routes = [
           activeIcon: 'mdi-flask-empty'
         }
       },
+    ],
+  },
+  {
+    path: '/auth/',
+    component: () => import('@/layouts/auth/Default.vue'),
+    children: [
       {
         path: 'login',
         name: 'Login',
-        component: Login,
-        meta: {
-          isMenuItem: false,
-        }
+        component: () => import(/* webpackChunkName: "login" */'@/views/Login.vue'),
       }
-    ],
-  },
+    ]
+  }
 ]
 
 const router = createRouter({
